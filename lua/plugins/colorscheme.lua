@@ -1,7 +1,9 @@
 return {
+  -- Configure LazyVim to load catppuccin
   {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    opts = { style = "night" },
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    },
   },
 }
