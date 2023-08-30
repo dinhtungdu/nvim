@@ -13,7 +13,7 @@ return {
       "shellcheck",
       "shfmt",
       "stylua",
-      "tsserver",
+      "typescript-language-server",
     },
   },
 }
