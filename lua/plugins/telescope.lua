@@ -20,13 +20,17 @@ if is_git_repo() then
 end
 
 return {
-
   {
     "nvim-telescope/telescope.nvim",
     keys = {
       -- git
       { "<leader>gc", Util.telescope("git_commits", opts), desc = "Git commits" },
       { "<leader>gs", Util.telescope("git_status", opts), desc = "Git status" },
+    },
+    opts = {
+      defaults = {
+        path_display = { "truncate" },
+      },
     },
   },
 }
