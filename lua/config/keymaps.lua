@@ -25,13 +25,16 @@ local function get_git_root()
 end
 
 -- lazygit
-map("n", "<leader>gG", function()
-  Util.float_term({ "lazygit" }, { cwd = Util.get_root(), esc_esc = false, ctrl_hjkl = false })
-end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gg", function()
   Util.float_term({ "lazygit" }, {
     cwd = get_git_root(),
     esc_esc = false,
     ctrl_hjkl = false,
   })
-end, { desc = "Lazygit (cwd)" })
+end, { desc = "Lazygit (cgwd)" })
+
+local lazyterm = function()
+  Util.float_term(nil, { cwd = get_git_root() })
+end
+map("n", "<leader>ft", lazyterm, { desc = "Terminal (cgwd)" })
+map("n", "<c-/>", lazyterm, { desc = "Terminal (cgwd)" })
