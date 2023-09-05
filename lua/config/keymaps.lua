@@ -33,8 +33,14 @@ map("n", "<leader>gg", function()
   })
 end, { desc = "Lazygit (cgwd)" })
 
+-- lazyterm
 local lazyterm = function()
   Util.float_term(nil, { cwd = get_git_root() })
 end
 map("n", "<leader>ft", lazyterm, { desc = "Terminal (cgwd)" })
 map("n", "<c-/>", lazyterm, { desc = "Terminal (cgwd)" })
+
+-- Q to delete current buffer.
+map("n", "<S-q>", function()
+  require("mini.bufremove").delete(0, false)
+end, { desc = "Delete Buffer" })
