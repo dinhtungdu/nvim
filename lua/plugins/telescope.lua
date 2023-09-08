@@ -1,3 +1,5 @@
+local Util = require("lazyvim.util")
+
 local function get_git_root()
   local dot_git_path = vim.fn.finddir(".git", ".;")
   return vim.fn.fnamemodify(dot_git_path, ":h")
@@ -23,6 +25,8 @@ return {
         end,
         desc = "Git status",
       },
+      { "<leader>fF", Util.telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>ff", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
     },
     opts = {
       defaults = {
