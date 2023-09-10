@@ -8,6 +8,7 @@ return {
     opts = function(_, opts)
       local cmp = require("cmp")
 
+      -- Add emoji source
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
         { name = "emoji" },
         {
@@ -20,9 +21,5 @@ return {
         },
       }))
     end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    commit = "11eb015",
   },
 }
