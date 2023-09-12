@@ -22,4 +22,8 @@ return {
       }))
     end,
   },
+  {
+    "zbirenbaum/copilot-cmp",
+    commit = "11eb015", -- This is the commit before the identation brokes.
+  },
 }
