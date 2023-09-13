@@ -36,6 +36,24 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Formatter
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "mason.nvim" },
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
+        sources = {
+          nls.builtins.formatting.stylua,
+          nls.builtins.formatting.shfmt,
+          nls.builtins.formatting.prettier,
+        },
+      }
+    end,
+  },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -87,7 +105,7 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+        vim.keymap.set('n', '<leader>gh', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview [g]it [h]unk' })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
@@ -195,7 +213,14 @@ require('lazy').setup({
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-    }
+    },
+    opts = {
+      filesystem = {
+        bind_to_cwd = true,
+        follow_current_file = { enabled = true },
+        use_libuv_file_watcher = true,
+      },
+    },
   },
   {
     "folke/flash.nvim",
@@ -262,7 +287,6 @@ vim.o.termguicolors = true
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- [[ Windows ]]
-vim.keymap.set("n", "<leader>x", "<C-W>c", { desc = "Delete window", remap = true })
 vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 -- Move to window using the <ctrl> hjkl keys
@@ -293,12 +317,13 @@ vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'File [E]xp
 
 -- [[ Terminal ]]
 vim.keymap.set({'n', 't', 'i', 'v'}, '<C-/>', utils.toggle_terminal_buffer, { desc = 'Toggle terminal buffer' })
-vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = 'Open terminal buffer' })
+vim.keymap.set('t', '<esc><esc>', '<C-\\><C-n>', { desc = 'Open terminal buffer' })
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    path_display={"truncate"},
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -399,7 +424,7 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- tsserver = {},
+  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
