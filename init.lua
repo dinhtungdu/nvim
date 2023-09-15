@@ -261,6 +261,12 @@ require('lazy').setup({
 
   -- Better notification
   {
+    'rcarriga/nvim-notify',
+    opts = {
+      stages = 'static',
+    },
+  },
+  {
     'folke/noice.nvim',
     event = 'VeryLazy',
     dependencies = {
