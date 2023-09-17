@@ -522,6 +522,13 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  tailwindcss = {
+    init_options = {
+      userLanguages = {
+        heex = 'phoenix-heex',
+      },
+    },
+  },
 }
 
 -- Setup neovim lua configuration
@@ -545,6 +552,7 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
+      init_options = (servers[server_name] or {}).init_options,
     }
   end,
 }
