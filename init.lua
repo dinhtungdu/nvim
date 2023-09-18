@@ -414,7 +414,7 @@ pcall(require('telescope').load_extension, 'live_grep_args')
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>f', function()
-  require('telescope.builtin').find_files { cwd = utils.get_root() }
+  require('telescope.builtin').find_files { cwd = utils.get_root 'wp-content' }
 end, { desc = 'Find [F]iles' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.

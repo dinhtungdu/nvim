@@ -86,13 +86,22 @@ M.icons = {
   },
 }
 
+function M.split(str, pat)
+  local tbl = {}
+  str:gsub(pat, function(x)
+    tbl[#tbl + 1] = x
+  end)
+  return tbl
+end
+
 -- returns the root directory based on:
+-- * parent folder contain given child directory
 -- * lsp workspace folders
 -- * lsp root_dir
 -- * root pattern of filename of the current buffer
 -- * root pattern of cwd
 ---@return string
-function M.get_root()
+function M.get_root(child)
   ---@type string?
   local path = vim.api.nvim_buf_get_name(0)
   path = path ~= '' and vim.loop.fs_realpath(path) or nil
@@ -123,7 +132,16 @@ function M.get_root()
     root = vim.fs.find(M.root_patterns, { path = path, upward = true })[1]
     root = root and vim.fs.dirname(root) or vim.loop.cwd()
   end
+
   ---@cast root string
+
+  if child then
+    local pos = string.find(root, child, 1, true)
+    if pos then
+      return string.sub(root, 0, pos - 1)
+    end
+  end
+
   return root
 end
 
