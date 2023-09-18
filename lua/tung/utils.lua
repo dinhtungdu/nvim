@@ -145,6 +145,19 @@ function M.get_root(child)
   return root
 end
 
+local enabled = true
+function M.toggle_diagnostics()
+  local LazyCoreUtil = require 'lazy.core.util'
+  enabled = not enabled
+  if enabled then
+    vim.diagnostic.enable()
+    LazyCoreUtil.info('Enabled diagnostics', { title = 'Diagnostics' })
+  else
+    vim.diagnostic.disable()
+    LazyCoreUtil.warn('Disabled diagnostics', { title = 'Diagnostics' })
+  end
+end
+
 return M
 
 -- The line beneath this is called `modeline`. See `:help modeline`

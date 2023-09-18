@@ -450,8 +450,11 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', function()
-  require('telescope').extensions.live_grep_args.live_grep_args { cwd = utils.get_root() }
+  require('telescope').extensions.live_grep_args.live_grep_args { cwd = utils.get_git_root() }
 end, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sG', function()
+  require('telescope').extensions.live_grep_args.live_grep_args { cwd = utils.get_root 'wp-content' }
+end, { desc = '[S]earch by [G]rep (Root)' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]resume' })
 vim.keymap.set('n', '<leader>sn', require('telescope').extensions.notify.notify, { desc = '[S]earch [N]otification' })
@@ -476,6 +479,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>dm', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic [m]essage' })
 vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
+vim.keymap.set('n', '<leader>dt', utils.toggle_diagnostics, { desc = '[D]iagnostics [t]oggle' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
