@@ -300,6 +300,9 @@ require('lazy').setup({
           ['vim.lsp.util.stylize_markdown'] = true,
           ['cmp.entry.get_documentation'] = true,
         },
+        hover = {
+          silent = true,
+        },
       },
       routes = {
         {
