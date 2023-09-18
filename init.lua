@@ -331,6 +331,9 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- Can't stand 8 columns tabs
+vim.o.tabstop = 4
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
