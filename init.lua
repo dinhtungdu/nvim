@@ -326,6 +326,18 @@ require('lazy').setup({
     },
   },
 
+  -- Highlight the word under cursor
+  {
+    'echasnovski/mini.cursorword',
+    version = '*',
+    event = 'VeryLazy',
+    config = function()
+      require('mini.cursorword').setup()
+      vim.cmd 'hi! link MiniCursorword Visual'
+      vim.cmd 'hi! MiniCursorwordCurrent gui=nocombine guifg=NONE guibg=NONE'
+    end,
+  },
+
   -- See: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'tung.plugins' },
 }, {})
