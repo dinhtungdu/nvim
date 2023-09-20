@@ -132,6 +132,7 @@ require('lazy').setup({
       {
         'zbirenbaum/copilot-cmp',
         dependencies = 'copilot.lua',
+        commit = '11eb015', -- This is the commit before the identation brokes.
         opts = {},
       },
     },
