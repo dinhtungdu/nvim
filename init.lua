@@ -416,6 +416,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- [[ Jump to last cursor position when opening a file ]]
+local last_cursor_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  group = last_cursor_group,
+  desc = 'Return cursor to where it was last time closing the file',
+  pattern = '*',
+  command = 'silent! normal! g`"zv',
+})
+
 -- [[ Neotree ]]
 vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'File [E]xplorer' })
 
