@@ -31,10 +31,11 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'rhysd/git-messenger.vim',
+  { 'rhysd/git-messenger.vim', event = 'VeryLazy' },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'VeryLazy',
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -74,7 +75,7 @@ require('lazy').setup({
   },
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  { 'tpope/vim-sleuth' },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -116,6 +117,7 @@ require('lazy').setup({
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -139,6 +141,7 @@ require('lazy').setup({
   },
   {
     'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
     cmd = 'Copilot',
     build = ':Copilot auth',
     opts = {
@@ -152,7 +155,11 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
 
   {
     -- Theme
@@ -198,11 +205,12 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim', event = 'VeryLazy', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
+    event = 'VeryLazy',
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -230,6 +238,7 @@ require('lazy').setup({
   -- Search and replace
   {
     'nvim-pack/nvim-spectre',
+    event = 'VeryLazy',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
@@ -252,6 +261,7 @@ require('lazy').setup({
   {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
+    event = 'VeryLazy',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
