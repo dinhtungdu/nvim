@@ -454,6 +454,9 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    preview = {
+      treesitter = false,
+    },
   },
   pickers = {
     buffers = {
