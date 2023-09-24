@@ -165,6 +165,14 @@ require('lazy').setup({
     -- Theme
     'catppuccin/nvim',
     config = function()
+      require('catppuccin').setup {
+        integrations = {
+          dap = {
+            enabled = true,
+            enable_ui = true, -- enable nvim-dap-ui
+          },
+        },
+      }
       vim.cmd.colorscheme 'catppuccin'
     end,
   },
@@ -359,6 +367,7 @@ require('lazy').setup({
 
 -- Can't stand 8 columns tabs
 vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 -- Set highlight on search
 vim.o.hlsearch = false
