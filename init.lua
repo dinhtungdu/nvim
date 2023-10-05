@@ -357,6 +357,15 @@ require('lazy').setup({
     end,
   },
 
+  -- Highlight color string
+  {
+    'norcalli/nvim-colorizer.lua',
+    event = 'VeryLazy',
+    config = function()
+      require('colorizer').setup()
+    end,
+  },
+
   -- See: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'tung.plugins' },
 }, {})
