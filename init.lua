@@ -472,7 +472,7 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
 vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'File [E]xplorer' })
 
 -- [[ Terminal ]]
-vim.keymap.set({ 'n', 't', 'i', 'v' }, '<C-/>', utils.toggle_terminal_buffer, { desc = 'Toggle terminal buffer' })
+vim.keymap.set({ 'n', 't', 'i', 'v' }, '<C-t>', utils.toggle_terminal_buffer, { desc = 'Toggle terminal buffer' })
 vim.keymap.set('t', '<esc><esc>', '<C-\\><C-n>', { desc = 'Open terminal buffer' })
 
 -- [[ Configure Telescope ]]
