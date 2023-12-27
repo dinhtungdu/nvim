@@ -131,27 +131,15 @@ require('lazy').setup({
 
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-emoji',
-      {
-        'zbirenbaum/copilot-cmp',
-        dependencies = 'copilot.lua',
-        commit = '11eb015', -- This is the commit before the identation brokes.
-        opts = {},
-      },
     },
   },
   {
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
     cmd = 'Copilot',
-    build = ':Copilot auth',
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-    },
+    config = function()
+      require('copilot').setup {}
+    end,
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -204,12 +192,11 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '▏',
-      show_trailing_blankline_indent = false,
-    },
+    config = function()
+      require('ibl').setup {
+        indent = { char = '▏' },
+      }
+    end,
   },
 
   -- "gc" to comment visual regions/lines
@@ -506,9 +493,7 @@ pcall(require('telescope').load_extension, 'live_grep_args')
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>f', function()
-  require('telescope.builtin').find_files { cwd = utils.get_root 'wp-content' }
-end, { desc = 'Find [F]iles' })
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, { desc = 'Find [F]iles' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -623,6 +608,15 @@ local servers = {
     init_options = {
       userLanguages = {
         heex = 'phoenix-heex',
+      },
+    },
+  },
+  intelephense = {
+    intelephense = {
+      environment = {
+        includePaths = {
+          '/Users/tung/Herd/woo',
+        },
       },
     },
   },
@@ -766,7 +760,6 @@ cmp.setup {
     { name = 'nvim_lsp', group_index = 2 },
     { name = 'path',     group_index = 2 },
     { name = 'luasnip',  group_index = 2 },
-    { name = 'copilot',  group_index = 2 },
     { name = 'emoji',    group_index = 2 },
   },
 }
