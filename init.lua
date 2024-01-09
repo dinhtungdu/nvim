@@ -262,6 +262,12 @@ require('lazy').setup({
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
       },
+      sources = {
+        'filesystem',
+        'buffers',
+        'git_status',
+        'document_symbols',
+      },
       event_handlers = {
         {
           event = 'file_opened',
@@ -287,6 +293,17 @@ require('lazy').setup({
       { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r", mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    },
+  },
+
+  -- Diagnostic
+  {
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
     },
   },
 
@@ -531,7 +548,9 @@ end, { desc = 'Lazygit' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>dm', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic [m]essage' })
-vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
+vim.keymap.set('n', '<leader>dl', function()
+  require('trouble').toggle()
+end, { desc = 'Open [d]iagnostics [l]ist' })
 vim.keymap.set('n', '<leader>dt', utils.toggle_diagnostics, { desc = '[D]iagnostics [t]oggle' })
 
 -- [[ Configure LSP ]]
