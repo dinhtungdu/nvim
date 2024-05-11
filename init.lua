@@ -154,12 +154,6 @@ require('lazy').setup({
     'catppuccin/nvim',
     config = function()
       require('catppuccin').setup {
-        integrations = {
-          dap = {
-            enabled = true,
-            enable_ui = true, -- enable nvim-dap-ui
-          },
-        },
       }
       vim.cmd.colorscheme 'catppuccin'
     end,
