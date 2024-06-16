@@ -154,10 +154,19 @@ require('lazy').setup({
     'catppuccin/nvim',
     config = function()
       require('catppuccin').setup {
+        transparent_background = true,
+        integrations = {
+          notify = true,
+          neotree = true,
+          noice = true,
+          lsp_trouble = true,
+          which_key = true,
+        },
       }
       vim.cmd.colorscheme 'catppuccin'
     end,
   },
+
   {
     'f-person/auto-dark-mode.nvim',
     config = {
@@ -177,6 +186,7 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
+        theme = 'catppuccin',
         component_separators = '|',
         section_separators = '',
       },
@@ -572,6 +582,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>ct', require('copilot.suggestion').toggle_auto_trigger, '[C]opilot [T]oggle Auto Trigger')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
