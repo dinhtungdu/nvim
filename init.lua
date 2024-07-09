@@ -483,7 +483,7 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window', remap = tr
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window', remap = true })
 
 -- Save file
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR>', { desc = 'Save file' })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>wa<CR>', { desc = 'Save file' })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
